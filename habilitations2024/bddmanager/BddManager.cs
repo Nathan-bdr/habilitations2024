@@ -57,5 +57,34 @@ namespace habilitations2024.bddmanager
             command.Prepare();
             command.ExecuteNonQuery();
         }
+        /// <summary>
+        /// exécution d'une requête de type "SELECT"
+        /// </summary>
+        /// <param name="stringQuery">requête SELECT</param>
+        /// <param name="parameters">dictionnaire contenant les paramètres</param>
+        /// <returns>liste de tableaux d'objets contenant les valeurs des colonnes</returns>
+        public List<Object[]> ReqSelect(string stringQuery, Dictionary<string, object> parameters = null)
+        {
+            MySqlCommand command = new MySqlCommand(stringQuery, connection);
+            if (!(parameters is null)) 
+            { 
+                foreach (KeyValuePair <string, object> parameter in parameters)
+                {
+                    command.Parameters.Add(new MySqlParameter(parameter.Key, parameter.Value));
+                }
+            }
+            command.Prepare();
+            MySqlDataReader reader = command.ExecuteReader();
+            int nbCols = reader.FieldCount;
+            List<Object[]> records = new List<object[]>();
+            while (reader.Read())
+            {
+                Object[] attributs = new Object[nbCols];
+                reader.GetValues(attributs);
+                records.Add(attributs);
+            }
+            reader.Close();
+            return records;
+        }
     }
 }
