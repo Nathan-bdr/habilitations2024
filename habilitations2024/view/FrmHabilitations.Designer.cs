@@ -1,6 +1,6 @@
-﻿namespace habilitations2024
+﻿namespace habilitations2024.view
 {
-    partial class Form1
+    partial class FrmHabilitations
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,13 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lstDeveloppeurs = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // lstDeveloppeurs
+            // 
+            this.lstDeveloppeurs.FormattingEnabled = true;
+            this.lstDeveloppeurs.Location = new System.Drawing.Point(329, 145);
+            this.lstDeveloppeurs.Name = "lstDeveloppeurs";
+            this.lstDeveloppeurs.Size = new System.Drawing.Size(120, 95);
+            this.lstDeveloppeurs.TabIndex = 0;
+            // 
+            // FrmHabilitations
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Controls.Add(this.lstDeveloppeurs);
+            this.Name = "FrmHabilitations";
+            this.Text = "FrmHabilitations";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox lstDeveloppeurs;
     }
 }
 
