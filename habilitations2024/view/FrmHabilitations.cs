@@ -29,6 +29,10 @@ namespace habilitations2024.view
         /// </summary>
         private BindingSource bdgProfils = new BindingSource();
         /// <summary>
+        /// objet pour gérer la liste des profils du filtre
+        /// </summary>
+        private BindingSource bdgFiltreProfils = new BindingSource();
+        /// <summary>
         /// contrôleur de la fenêtre
         /// </summary>
         private FrmHabilitationsController controller;
@@ -52,14 +56,18 @@ namespace habilitations2024.view
             RemplirListeProfils();
             EnCoursModifDeveloppeur(false);
             EnCoursModifPwd(false);
+
+            profilFiltre.SelectedIndexChanged += profilFiltre_SelectedIndexChanged;
+            InitialiserFiltreProfils();
         }
 
         /// <summary>
-        /// Affiche les développeurs
+        /// affiche les développeurs
         /// </summary>
-        private void RemplirListeDeveloppeurs()
+        /// <param name="idProfil"></param>
+        private void RemplirListeDeveloppeurs(int? idProfil = null)
         {
-            List<Developpeur> lesDeveloppeurs = controller.GetLesDeveloppeurs();
+            List<Developpeur> lesDeveloppeurs = controller.GetLesDeveloppeurs(idProfil);
             bdgDeveloppeurs.DataSource = lesDeveloppeurs;
             dgvDeveloppeurs.DataSource = bdgDeveloppeurs;
             dgvDeveloppeurs.Columns["iddeveloppeur"].Visible = false;
@@ -246,6 +254,37 @@ namespace habilitations2024.view
             grpBoxAjouterDev.Enabled = !modif;
             txtPwd.Text = "";
             txtEncore.Text = "";
+        }
+
+        /// <summary>
+        /// initialiser le filtre
+        /// </summary>
+        private void InitialiserFiltreProfils()
+        {
+            List<Profil> profilsAvecVide = new List<Profil>();
+            profilsAvecVide.Add(new Profil(0, ""));
+            profilsAvecVide.AddRange(controller.GetLesProfils());
+
+            bdgFiltreProfils.DataSource = profilsAvecVide;
+            profilFiltre.DataSource = bdgFiltreProfils;
+            profilFiltre.DisplayMember = "Nom";
+            profilFiltre.ValueMember = "IdProfil";
+            profilFiltre.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// gérer le changement de filtre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void profilFiltre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (profilFiltre.SelectedItem != null)
+            {
+                Profil profilSelectionne = (Profil)profilFiltre.SelectedItem;
+                int? idProfil = profilSelectionne.Idprofil == 0 ? (int?)null : profilSelectionne.Idprofil;
+                RemplirListeDeveloppeurs(idProfil);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

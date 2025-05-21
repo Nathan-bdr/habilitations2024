@@ -30,6 +30,7 @@
         {
             this.dgvDeveloppeurs = new System.Windows.Forms.DataGridView();
             this.grpBoxLesDeveloppeurs = new System.Windows.Forms.GroupBox();
+            this.profilFiltre = new System.Windows.Forms.ComboBox();
             this.btnChangerPwd = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnModifier = new System.Windows.Forms.Button();
@@ -53,6 +54,7 @@
             this.lblPwd = new System.Windows.Forms.Label();
             this.txtEncore = new System.Windows.Forms.TextBox();
             this.txtPwd = new System.Windows.Forms.TextBox();
+            this.lblProfilFiltre = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeveloppeurs)).BeginInit();
             this.grpBoxLesDeveloppeurs.SuspendLayout();
             this.grpBoxAjouterDev.SuspendLayout();
@@ -62,27 +64,37 @@
             // dgvDeveloppeurs
             // 
             this.dgvDeveloppeurs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDeveloppeurs.Location = new System.Drawing.Point(6, 19);
+            this.dgvDeveloppeurs.Location = new System.Drawing.Point(6, 46);
             this.dgvDeveloppeurs.Name = "dgvDeveloppeurs";
-            this.dgvDeveloppeurs.Size = new System.Drawing.Size(749, 264);
+            this.dgvDeveloppeurs.Size = new System.Drawing.Size(749, 275);
             this.dgvDeveloppeurs.TabIndex = 0;
             // 
             // grpBoxLesDeveloppeurs
             // 
+            this.grpBoxLesDeveloppeurs.Controls.Add(this.lblProfilFiltre);
+            this.grpBoxLesDeveloppeurs.Controls.Add(this.profilFiltre);
             this.grpBoxLesDeveloppeurs.Controls.Add(this.btnChangerPwd);
             this.grpBoxLesDeveloppeurs.Controls.Add(this.btnSupprimer);
             this.grpBoxLesDeveloppeurs.Controls.Add(this.btnModifier);
             this.grpBoxLesDeveloppeurs.Controls.Add(this.dgvDeveloppeurs);
             this.grpBoxLesDeveloppeurs.Location = new System.Drawing.Point(18, 21);
             this.grpBoxLesDeveloppeurs.Name = "grpBoxLesDeveloppeurs";
-            this.grpBoxLesDeveloppeurs.Size = new System.Drawing.Size(761, 319);
+            this.grpBoxLesDeveloppeurs.Size = new System.Drawing.Size(761, 356);
             this.grpBoxLesDeveloppeurs.TabIndex = 1;
             this.grpBoxLesDeveloppeurs.TabStop = false;
             this.grpBoxLesDeveloppeurs.Text = "les développeurs";
             // 
+            // profilFiltre
+            // 
+            this.profilFiltre.FormattingEnabled = true;
+            this.profilFiltre.Location = new System.Drawing.Point(91, 19);
+            this.profilFiltre.Name = "profilFiltre";
+            this.profilFiltre.Size = new System.Drawing.Size(121, 21);
+            this.profilFiltre.TabIndex = 3;
+            // 
             // btnChangerPwd
             // 
-            this.btnChangerPwd.Location = new System.Drawing.Point(184, 289);
+            this.btnChangerPwd.Location = new System.Drawing.Point(184, 327);
             this.btnChangerPwd.Name = "btnChangerPwd";
             this.btnChangerPwd.Size = new System.Drawing.Size(105, 23);
             this.btnChangerPwd.TabIndex = 2;
@@ -92,7 +104,7 @@
             // 
             // btnSupprimer
             // 
-            this.btnSupprimer.Location = new System.Drawing.Point(95, 289);
+            this.btnSupprimer.Location = new System.Drawing.Point(95, 327);
             this.btnSupprimer.Name = "btnSupprimer";
             this.btnSupprimer.Size = new System.Drawing.Size(83, 23);
             this.btnSupprimer.TabIndex = 2;
@@ -102,7 +114,7 @@
             // 
             // btnModifier
             // 
-            this.btnModifier.Location = new System.Drawing.Point(6, 289);
+            this.btnModifier.Location = new System.Drawing.Point(6, 327);
             this.btnModifier.Name = "btnModifier";
             this.btnModifier.Size = new System.Drawing.Size(83, 23);
             this.btnModifier.TabIndex = 1;
@@ -124,7 +136,7 @@
             this.grpBoxAjouterDev.Controls.Add(this.txtNom);
             this.grpBoxAjouterDev.Controls.Add(this.lblPrenom);
             this.grpBoxAjouterDev.Controls.Add(this.lblNom);
-            this.grpBoxAjouterDev.Location = new System.Drawing.Point(18, 356);
+            this.grpBoxAjouterDev.Location = new System.Drawing.Point(18, 390);
             this.grpBoxAjouterDev.Name = "grpBoxAjouterDev";
             this.grpBoxAjouterDev.Size = new System.Drawing.Size(761, 148);
             this.grpBoxAjouterDev.TabIndex = 2;
@@ -242,7 +254,7 @@
             this.grpBoxChangerPwd.Controls.Add(this.txtEncore);
             this.grpBoxChangerPwd.Controls.Add(this.txtPwd);
             this.grpBoxChangerPwd.Enabled = false;
-            this.grpBoxChangerPwd.Location = new System.Drawing.Point(18, 529);
+            this.grpBoxChangerPwd.Location = new System.Drawing.Point(18, 554);
             this.grpBoxChangerPwd.Name = "grpBoxChangerPwd";
             this.grpBoxChangerPwd.Size = new System.Drawing.Size(761, 99);
             this.grpBoxChangerPwd.TabIndex = 3;
@@ -303,11 +315,20 @@
             this.txtPwd.Size = new System.Drawing.Size(282, 20);
             this.txtPwd.TabIndex = 4;
             // 
+            // lblProfilFiltre
+            // 
+            this.lblProfilFiltre.AutoSize = true;
+            this.lblProfilFiltre.Location = new System.Drawing.Point(13, 22);
+            this.lblProfilFiltre.Name = "lblProfilFiltre";
+            this.lblProfilFiltre.Size = new System.Drawing.Size(72, 13);
+            this.lblProfilFiltre.TabIndex = 4;
+            this.lblProfilFiltre.Text = "filtrer par profil";
+            // 
             // FrmHabilitations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 646);
+            this.ClientSize = new System.Drawing.Size(800, 673);
             this.Controls.Add(this.grpBoxChangerPwd);
             this.Controls.Add(this.grpBoxAjouterDev);
             this.Controls.Add(this.grpBoxLesDeveloppeurs);
@@ -316,6 +337,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeveloppeurs)).EndInit();
             this.grpBoxLesDeveloppeurs.ResumeLayout(false);
+            this.grpBoxLesDeveloppeurs.PerformLayout();
             this.grpBoxAjouterDev.ResumeLayout(false);
             this.grpBoxAjouterDev.PerformLayout();
             this.grpBoxChangerPwd.ResumeLayout(false);
@@ -351,6 +373,8 @@
         private System.Windows.Forms.TextBox txtEncore;
         private System.Windows.Forms.TextBox txtPwd;
         private System.Windows.Forms.Button btnAnnulerPwd;
+        private System.Windows.Forms.ComboBox profilFiltre;
+        private System.Windows.Forms.Label lblProfilFiltre;
     }
 }
 
