@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace habilitations2024.dal
 {
     /// <summary>
-    /// classe permettant de gérer les demandes concernant les développeurs
+    /// Classe permettant de gérer les demandes concernant les developpeurs
     /// </summary>
     public class DeveloppeurAccess
     {
         /// <summary>
-        /// instance unique de l'accès aux données
+        /// Instance unique de l'accès aux données
         /// </summary>
         private readonly Access access = null;
 
         /// <summary>
-        /// constructeur pour créer l'accès aux données
+        /// Constructeur pour créer l'accès aux données
         /// </summary>
         public DeveloppeurAccess()
         {
@@ -26,159 +27,7 @@ namespace habilitations2024.dal
         }
 
         /// <summary>
-        /// récupère et retourne les développeurs
-        /// </summary>
-        /// <returns>liste des développeurs</returns>
-        /// <param name="idProfil"></param>
-        public List<Developpeur> GetLesDeveloppeurs(int? idProfil = null)
-        {
-            List<Developpeur> lesDeveloppeurs = new List<Developpeur>();
-            if (access.Manager != null)
-            {
-                string req = "select d.iddeveloppeur as iddeveloppeur, d.nom as nom, d.prenom as prenom, d.tel as tel, d.mail as mail, p.idprofil as idprofil, p.nom as profil ";
-                req += "from developpeur d join profil p on (d.idprofil = p.idprofil) ";
-
-                if (idProfil != null)
-                {
-                    req += "where d.idprofil = @idprofil ";
-                }
-
-                req += "order by nom, prenom;";
-                try
-                {
-                    Dictionary<string, object> parameters = new Dictionary<string, object>();
-                    if (idProfil != null)
-                    {
-                        parameters.Add("@idprofil", idProfil);
-                    }
-                    List<Object[]> records = access.Manager.ReqSelect(req, parameters);
-                    if (records != null)
-                    {
-                        foreach (Object[] record in records)
-                        {
-                            Profil profil = new Profil((int)record[5], (string)record[6]);
-                            Developpeur developpeur = new Developpeur((int)record[0], (string)record[1], (string)record[2], (string)record[3], (string)record[4], profil);
-                            lesDeveloppeurs.Add(developpeur);
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Environment.Exit(0);
-                }
-            }
-            return lesDeveloppeurs;
-        }
-
-        /// <summary>
-        /// demande de suppression d'un développeur
-        /// </summary>
-        /// <param name="developpeur">objet developpeur à supprimer</param>
-        public void DelDeveloppeur(Developpeur developpeur)
-        {
-            if (access.Manager != null)
-            {
-                string req = "delete from developpeur where iddeveloppeur = @iddeveloppeur;";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@iddeveloppeur", developpeur.Iddeveloppeur);
-                try
-                {
-                    access.Manager.ReqUpdate(req, parameters);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        /// <summary>
-        /// demande d'ajout d'un développeur
-        /// </summary>
-        /// <param name="developpeur">objet developpeur à ajouter</param>
-        public void AddDeveloppeur(Developpeur developpeur)
-        {
-            if (access.Manager != null)
-            {
-                string req = "insert into developpeur(nom, prenom, tel, mail, pwd, idprofil) ";
-                req += "values (@nom, @prenom, @tel, @mail, SHA2(@pwd, 256), @idprofil);";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@nom", developpeur.Nom);
-                parameters.Add("@prenom", developpeur.Prenom);
-                parameters.Add("@tel", developpeur.Tel);
-                parameters.Add("@mail", developpeur.Mail);
-                parameters.Add("@pwd", developpeur.Nom);
-                parameters.Add("@idprofil", developpeur.Profil.Idprofil);
-                try
-                {
-                    access.Manager.ReqUpdate(req, parameters);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        /// <summary>
-        /// demande de modification d'un développeur
-        /// </summary>
-        /// <param name="developpeur">objet de type developpeur à modifier</param>
-        public void UpdateDeveloppeur(Developpeur developpeur)
-        {
-            if (access.Manager != null)
-            {
-                string req = "update developpeur set nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idprofil = @idprofil ";
-                req += "where iddeveloppeur = @iddeveloppeur;";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@idDeveloppeur", developpeur.Iddeveloppeur);
-                parameters.Add("@nom", developpeur.Nom);
-                parameters.Add("@prenom", developpeur.Prenom);
-                parameters.Add("@tel", developpeur.Tel);
-                parameters.Add("@mail", developpeur.Mail);
-                parameters.Add("@idprofil", developpeur.Profil.Idprofil);
-                try
-                {
-                    access.Manager.ReqUpdate(req, parameters);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        /// <summary>
-        /// demande de modification du pwd
-        /// </summary>
-        /// <param name="developpeur">objet developpeur avec nouveau pwd</param>
-        public void UpdatePwd(Developpeur developpeur)
-        {
-            if (access.Manager != null)
-            {
-                string req = "update developpeur set pwd = SHA2(@pwd, 256) ";
-                req += "where iddeveloppeur = @iddeveloppeur;";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add("@idDeveloppeur", developpeur.Iddeveloppeur);
-                parameters.Add("@pwd", developpeur.Pwd);
-                try
-                {
-                    access.Manager.ReqUpdate(req, parameters);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        /// <summary>
-        /// contrôle si l'utilisateur a le droit de se connecter (nom, prénom, pwd et profil "admin")
+        /// Controle si l'utillisateur a le droit de se connecter (nom, prénom, pwd et profil "admin")
         /// </summary>
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
@@ -205,10 +54,161 @@ namespace habilitations2024.dal
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.ControleAuthentification catch req={0} erreur={1}", req, e.Message);
                     Environment.Exit(0);
                 }
             }
             return false;
         }
+
+        /// <summary>
+        /// Récupère et retourne les développeurs
+        /// </summary>
+        /// <returns>liste des développeurs</returns>
+        public List<Developpeur> GetLesDeveloppeurs(int? idProfil = null)
+        {
+            List<Developpeur> lesDeveloppeurs = new List<Developpeur>();
+            if (access.Manager != null)
+            {
+                string req = "select d.iddeveloppeur as iddeveloppeur, d.nom as nom, d.prenom as prenom, d.tel as tel, d.mail as mail, p.idprofil as idprofil, p.nom as profil ";
+                req += "from developpeur d join profil p on (d.idprofil = p.idprofil) ";
+                req += "order by nom, prenom;";
+                try
+                {
+                    List<Object[]> records = access.Manager.ReqSelect(req);
+                    if (records != null)
+                    {
+                        Log.Debug("DeveloppeurAccess.GetLesDeveloppeurs nb records = {0}", records.Count);
+                        foreach (Object[] record in records)
+                        {
+                            Log.Debug("DeveloppeurAccess.GetLesDeveloppeurs Profil : id={0} nom={1}", record[5], record[6]);
+                            Log.Debug("DeveloppeurAccess.GetLesDeveloppeurs Developpeur : id={0} nom={1} prenom={2} tel={3} mail={4} ", record[0], record[1], record[2], record[3], record[4]);
+                            Profil profil = new Profil((int)record[5], (string)record[6]);
+                            Developpeur developpeur = new Developpeur((int)record[0], (string)record[1], (string)record[2],
+                                (string)record[3], (string)record[4], profil);
+                            lesDeveloppeurs.Add(developpeur);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.GetLesDeveloppeurs catch req={0} erreur={1}", req, e.Message);
+                    Environment.Exit(0);
+                }
+            }
+            return lesDeveloppeurs;
+        }
+
+        /// <summary>
+        /// Demande de suppression d'un développeur
+        /// </summary>
+        /// <param name="developpeur">objet developpeur à supprimer</param>
+        public void DelDeveloppeur(Developpeur developpeur)
+        {
+            if (access.Manager != null)
+            {
+                string req = "delete from developpeur where iddeveloppeur = @iddeveloppeur;";
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("@iddeveloppeur", developpeur.Iddeveloppeur);
+                try
+                {
+                    access.Manager.ReqUpdate(req, parameters);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.DelDepveloppeur catch req={0} erreur={1}", req, e.Message);
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Demande d'ajout un développeur
+        /// </summary>
+        /// <param name="developpeur">objet developpeur à ajouter</param>
+        public void AddDeveloppeur(Developpeur developpeur)
+        {
+            if (access.Manager != null)
+            {
+                string req = "insert into developpeur(nom, prenom, tel, mail, pwd, idprofil) ";
+                req += "values (@nom, @prenom, @tel, @mail, SHA2(@pwd, 256), @idprofil);";
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("@nom", developpeur.Nom);
+                parameters.Add("@prenom", developpeur.Prenom);
+                parameters.Add("@tel", developpeur.Tel);
+                parameters.Add("@mail", developpeur.Mail);
+                parameters.Add("@pwd", developpeur.Nom);
+                parameters.Add("@idprofil", developpeur.Profil.Idprofil);
+                try
+                {
+                    access.Manager.ReqUpdate(req, parameters);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.AddDeveloppeur catch req={0} erreur={1}", req, e.Message);
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Demande de modification d'un développeur
+        /// </summary>
+        /// <param name="developpeur">objet developpeur à modifier</param>
+        public void UpdateDeveloppeur(Developpeur developpeur)
+        {
+            if (access.Manager != null)
+            {
+                string req = "update developpeur set nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idprofil = @idprofil ";
+                req += "where iddeveloppeur = @iddeveloppeur;";
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("@idDeveloppeur", developpeur.Iddeveloppeur);
+                parameters.Add("@nom", developpeur.Nom);
+                parameters.Add("@prenom", developpeur.Prenom);
+                parameters.Add("@tel", developpeur.Tel);
+                parameters.Add("@mail", developpeur.Mail);
+                parameters.Add("idprofil", developpeur.Profil.Idprofil);
+                try
+                {
+                    access.Manager.ReqUpdate(req, parameters);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.UpdateDeveloppeur catch req={0} erreur={1}", req, e.Message);
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Demande de modification du pwd
+        /// </summary>
+        /// <param name="developpeur">objet developpeur avec nouveau pwd</param>
+        public void UpdatePwd(Developpeur developpeur)
+        {
+            if (access.Manager != null)
+            {
+                string req = "update developpeur set pwd = SHA2(@pwd, 256) ";
+                req += "where iddeveloppeur = @iddeveloppeur;";
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add("@idDeveloppeur", developpeur.Iddeveloppeur);
+                parameters.Add("@pwd", developpeur.Pwd);
+                try
+                {
+                    access.Manager.ReqUpdate(req, parameters);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Log.Error("DeveloppeurAccess.UpdatePwd catch req={0} erreur={1}", req, e.Message);
+                    Environment.Exit(0);
+                }
+            }
+        }
+
     }
 }
