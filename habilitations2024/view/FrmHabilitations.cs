@@ -23,11 +23,11 @@ namespace habilitations2024.view
         /// <summary>
         /// objet pour gérer la liste de dévelopeurs
         /// </summary>
-        private BindingSource bdgDeveloppeurs = new BindingSource();
+        private readonly BindingSource bdgDeveloppeurs = new BindingSource();
         /// <summary>
         /// objet pour gérer la liste des profils
         /// </summary>
-        private BindingSource bdgProfils = new BindingSource();
+        private readonly BindingSource bdgProfils = new BindingSource();
         /// <summary>
         /// objet pour gérer la liste des profils du filtre
         /// </summary>
@@ -36,6 +36,10 @@ namespace habilitations2024.view
         /// contrôleur de la fenêtre
         /// </summary>
         private FrmHabilitationsController controller;
+        /// <summary>
+        /// Titre des fenêtres d'information
+        /// </summary>
+        private readonly String titreFenetreInformation = "Information";
 
         /// <summary>
         /// construction des composants graphiques et appel des autres initialisations
@@ -104,7 +108,7 @@ namespace habilitations2024.view
             }
             else
             {
-                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+                MessageBox.Show("Une ligne doit être sélectionnée.", titreFenetreInformation);
             }
         }
 
@@ -125,7 +129,7 @@ namespace habilitations2024.view
                 }
                 else
                 {
-                    MessageBox.Show("Une ligne doit être sélectionnée", "Information");
+                    MessageBox.Show("Une ligne doit être sélectionnée.", titreFenetreInformation);
                 }
             }
         }
@@ -143,7 +147,7 @@ namespace habilitations2024.view
             }
             else
             {
-                MessageBox.Show("Une ligne doit être sélectionnée", "Information");
+                MessageBox.Show("Une ligne doit être sélectionnée.", titreFenetreInformation);
             }
         }
 
@@ -177,7 +181,7 @@ namespace habilitations2024.view
             }
             else
             {
-                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
+                MessageBox.Show("Tous les champs doivent être remplis.", titreFenetreInformation);
             }
         }
 
@@ -211,7 +215,7 @@ namespace habilitations2024.view
             }
             else
             {
-                MessageBox.Show("Les 2 zones doivent être remplies et de contenu identique", "Information");
+                MessageBox.Show("Les 2 zones doivent être remplies et de contenu identique", titreFenetreInformation);
             }
         }
 
@@ -287,6 +291,11 @@ namespace habilitations2024.view
             }
         }
 
+        /// <summary>
+        /// gérer le chargement de la fenêtre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
         }
