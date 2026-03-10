@@ -51,7 +51,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="dal\AccessTests.cs" />
     <Compile Include="dal\DeveloppeurAccessTests.cs" />
+    <Compile Include="dal\ProfilAccessTests.cs" />
+    <Compile Include="model\AdminTests.cs" />
+    <Compile Include="model\DeveloppeurTests.cs" />
+    <Compile Include="model\ProfilTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +66,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="..\habilitations2024\App.config">
+      <Link>App.config</Link>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

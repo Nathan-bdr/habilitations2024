@@ -26,6 +26,15 @@ namespace habilitations2024.bddmanager
             connection = new MySqlConnection(stringConnect);
             connection.Open();
         }
+
+        /// Exécution d'une requête de type LCT (begin transaction, commit, rollback)
+        /// requête
+        public void ReqControle(string stringQuery)
+        {
+            MySqlCommand command = new MySqlCommand(stringQuery, connection);
+            command.ExecuteNonQuery();
+        }
+
         /// <summary>
         /// création d'une seule instance de la classe
         /// </summary>
