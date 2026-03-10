@@ -30,6 +30,7 @@
         {
             this.dgvDeveloppeurs = new System.Windows.Forms.DataGridView();
             this.grpBoxLesDeveloppeurs = new System.Windows.Forms.GroupBox();
+            this.lblProfilFiltre = new System.Windows.Forms.Label();
             this.profilFiltre = new System.Windows.Forms.ComboBox();
             this.btnChangerPwd = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
@@ -54,7 +55,9 @@
             this.lblPwd = new System.Windows.Forms.Label();
             this.txtEncore = new System.Windows.Forms.TextBox();
             this.txtPwd = new System.Windows.Forms.TextBox();
-            this.lblProfilFiltre = new System.Windows.Forms.Label();
+            this.txtProfil = new System.Windows.Forms.TextBox();
+            this.btnDelProfil = new System.Windows.Forms.Button();
+            this.btnAddProfil = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeveloppeurs)).BeginInit();
             this.grpBoxLesDeveloppeurs.SuspendLayout();
             this.grpBoxAjouterDev.SuspendLayout();
@@ -83,6 +86,15 @@
             this.grpBoxLesDeveloppeurs.TabIndex = 1;
             this.grpBoxLesDeveloppeurs.TabStop = false;
             this.grpBoxLesDeveloppeurs.Text = "les développeurs";
+            // 
+            // lblProfilFiltre
+            // 
+            this.lblProfilFiltre.AutoSize = true;
+            this.lblProfilFiltre.Location = new System.Drawing.Point(13, 22);
+            this.lblProfilFiltre.Name = "lblProfilFiltre";
+            this.lblProfilFiltre.Size = new System.Drawing.Size(72, 13);
+            this.lblProfilFiltre.TabIndex = 4;
+            this.lblProfilFiltre.Text = "filtrer par profil";
             // 
             // profilFiltre
             // 
@@ -124,6 +136,9 @@
             // 
             // grpBoxAjouterDev
             // 
+            this.grpBoxAjouterDev.Controls.Add(this.btnAddProfil);
+            this.grpBoxAjouterDev.Controls.Add(this.btnDelProfil);
+            this.grpBoxAjouterDev.Controls.Add(this.txtProfil);
             this.grpBoxAjouterDev.Controls.Add(this.btnAnnuler);
             this.grpBoxAjouterDev.Controls.Add(this.btnEnregistrer);
             this.grpBoxAjouterDev.Controls.Add(this.cmbProfil);
@@ -315,14 +330,30 @@
             this.txtPwd.Size = new System.Drawing.Size(282, 20);
             this.txtPwd.TabIndex = 4;
             // 
-            // lblProfilFiltre
+            // txtProfil
             // 
-            this.lblProfilFiltre.AutoSize = true;
-            this.lblProfilFiltre.Location = new System.Drawing.Point(13, 22);
-            this.lblProfilFiltre.Name = "lblProfilFiltre";
-            this.lblProfilFiltre.Size = new System.Drawing.Size(72, 13);
-            this.lblProfilFiltre.TabIndex = 4;
-            this.lblProfilFiltre.Text = "filtrer par profil";
+            this.txtProfil.Location = new System.Drawing.Point(449, 109);
+            this.txtProfil.Name = "txtProfil";
+            this.txtProfil.Size = new System.Drawing.Size(170, 20);
+            this.txtProfil.TabIndex = 12;
+            // 
+            // btnDelProfil
+            // 
+            this.btnDelProfil.Location = new System.Drawing.Point(635, 80);
+            this.btnDelProfil.Name = "btnDelProfil";
+            this.btnDelProfil.Size = new System.Drawing.Size(106, 23);
+            this.btnDelProfil.TabIndex = 13;
+            this.btnDelProfil.Text = "supprimer";
+            this.btnDelProfil.UseVisualStyleBackColor = true;
+            // 
+            // btnAddProfil
+            // 
+            this.btnAddProfil.Location = new System.Drawing.Point(635, 107);
+            this.btnAddProfil.Name = "btnAddProfil";
+            this.btnAddProfil.Size = new System.Drawing.Size(106, 23);
+            this.btnAddProfil.TabIndex = 14;
+            this.btnAddProfil.Text = "ajouter";
+            this.btnAddProfil.UseVisualStyleBackColor = true;
             // 
             // FrmHabilitations
             // 
@@ -375,6 +406,9 @@
         private System.Windows.Forms.Button btnAnnulerPwd;
         private System.Windows.Forms.ComboBox profilFiltre;
         private System.Windows.Forms.Label lblProfilFiltre;
+        private System.Windows.Forms.Button btnDelProfil;
+        private System.Windows.Forms.TextBox txtProfil;
+        private System.Windows.Forms.Button btnAddProfil;
     }
 }
 
