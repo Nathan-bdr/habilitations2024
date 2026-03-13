@@ -39,17 +39,21 @@ namespace habilitations2024.dal.Tests
             string nom = "Nolan";
             string prenom = "Rooney";
             string pwd = "Nolan";
-            Assert.IsTrue(developpeurAccess.ControleAuthentification(new Admin(nom, prenom, pwd)),
+            string mail = "nolan.rooney@mail.com";
+            Assert.IsTrue(developpeurAccess.ControleAuthentification(new Admin(nom, prenom, pwd, mail)),
                 "devrait réussir : données utilisateur correctes");
             string erreurNom = "__";
             string erreurPrenom = "__";
             string erreurPwd = "__";
-            Assert.IsFalse(developpeurAccess.ControleAuthentification(new Admin(erreurNom, prenom, pwd)),
+            string erreurMail = "__";
+            Assert.IsFalse(developpeurAccess.ControleAuthentification(new Admin(erreurNom, prenom, pwd, mail)),
                 "devrait échouer : nom incorrect");
-            Assert.IsFalse(developpeurAccess.ControleAuthentification(new Admin(nom, erreurPrenom, pwd)),
+            Assert.IsFalse(developpeurAccess.ControleAuthentification(new Admin(nom, erreurPrenom, pwd, mail)),
                 "devrait échouer : prenom incorrect");
-            Assert.IsFalse(developpeurAccess.ControleAuthentification(new Admin(nom, prenom, erreurPwd)),
+            Assert.IsFalse(developpeurAccess.ControleAuthentification(new Admin(nom, prenom, erreurPwd, mail)),
                 "devrait échouer : pwd incorrect");
+            Assert.IsFalse(developpeurAccess.ControleAuthentification(new Admin(nom, prenom, pwd, erreurMail)),
+                "devrait échouer : mail incorrect");
         }
 
         [TestMethod()]

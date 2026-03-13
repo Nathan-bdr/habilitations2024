@@ -14,6 +14,7 @@ namespace habilitations2024.model
         public string Nom { get; }
         public string Prenom { get; }
         public string Pwd { get; }
+        public string Mail { get; }
 
         /// <summary>
         /// valorise les propriétés
@@ -21,11 +22,13 @@ namespace habilitations2024.model
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
         /// <param name="pwd"></param>
-        public Admin(string nom, string prenom, string pwd)
+        /// <param name="mail"></param>
+        public Admin(string nom, string prenom, string pwd, string mail)
         {
             this.Nom = nom;
             this.Prenom = prenom;
             this.Pwd = pwd;
+            this.Mail = mail;
         }
     }
 }

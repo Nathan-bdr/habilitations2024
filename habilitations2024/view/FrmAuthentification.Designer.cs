@@ -34,6 +34,8 @@
             this.txtFrmNom = new System.Windows.Forms.TextBox();
             this.txtFrmPrenom = new System.Windows.Forms.TextBox();
             this.txtFrmPwd = new System.Windows.Forms.TextBox();
+            this.txtFrmMail = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnFrmSeConnecter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -86,12 +88,28 @@
             this.txtFrmPwd.Size = new System.Drawing.Size(213, 20);
             this.txtFrmPwd.TabIndex = 5;
             // 
+            // txtFrmMail
+            // 
+            this.txtFrmMail.Location = new System.Drawing.Point(78, 90);
+            this.txtFrmMail.Name = "txtFrmMail";
+            this.txtFrmMail.Size = new System.Drawing.Size(213, 20);
+            this.txtFrmMail.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 93);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "mail";
+            // 
             // btnFrmSeConnecter
             // 
-            this.btnFrmSeConnecter.Location = new System.Drawing.Point(178, 90);
+            this.btnFrmSeConnecter.Location = new System.Drawing.Point(178, 121);
             this.btnFrmSeConnecter.Name = "btnFrmSeConnecter";
             this.btnFrmSeConnecter.Size = new System.Drawing.Size(113, 23);
-            this.btnFrmSeConnecter.TabIndex = 6;
+            this.btnFrmSeConnecter.TabIndex = 9;
             this.btnFrmSeConnecter.Text = "se connecter";
             this.btnFrmSeConnecter.UseVisualStyleBackColor = true;
             this.btnFrmSeConnecter.Click += new System.EventHandler(this.btnFrmSeConnecter_Click);
@@ -100,8 +118,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 123);
+            this.ClientSize = new System.Drawing.Size(301, 156);
             this.Controls.Add(this.btnFrmSeConnecter);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtFrmMail);
             this.Controls.Add(this.txtFrmPwd);
             this.Controls.Add(this.txtFrmPrenom);
             this.Controls.Add(this.txtFrmNom);
@@ -123,6 +143,8 @@
         private System.Windows.Forms.TextBox txtFrmNom;
         private System.Windows.Forms.TextBox txtFrmPrenom;
         private System.Windows.Forms.TextBox txtFrmPwd;
+        private System.Windows.Forms.TextBox txtFrmMail;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnFrmSeConnecter;
     }
 }

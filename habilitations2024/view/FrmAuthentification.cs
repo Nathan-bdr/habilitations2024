@@ -49,13 +49,15 @@ namespace habilitations2024.view
             String nom = txtFrmNom.Text;
             String prenom = txtFrmPrenom.Text;
             String pwd = txtFrmPwd.Text;
-            if (String.IsNullOrEmpty(nom) || String.IsNullOrEmpty(prenom) || String.IsNullOrEmpty(pwd))
+            String mail = txtFrmMail.Text;
+
+            if (String.IsNullOrEmpty(nom) || String.IsNullOrEmpty(prenom) || String.IsNullOrEmpty(pwd) || String.IsNullOrEmpty(mail))
             {
                 MessageBox.Show("Tous les champs doivent être remplis.", "Information");
             }
             else
             {
-                Admin admin = new Admin(nom, prenom, pwd);
+                Admin admin = new Admin(nom, prenom, pwd, mail);
                 if (controller.ControleAuthentification(admin))
                 {
                     FrmHabilitations frm = new FrmHabilitations();

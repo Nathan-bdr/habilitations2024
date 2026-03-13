@@ -38,11 +38,12 @@ namespace habilitations2024.dal
             if (access.Manager != null)
             {
                 string req = "select * from developpeur d join profil p on d.idprofil=p.idprofil ";
-                req += "where d.nom=@nom and d.prenom=@prenom and pwd=SHA2(@pwd, 256) and p.nom='admin';";
+                req += "where d.nom=@nom and d.prenom=@prenom and pwd=SHA2(@pwd, 256) and d.mail=@mail and p.nom='admin';";
                 Dictionary<string, object> parameters = new Dictionary<string, object> {
                     { "@nom", admin.Nom },
                     { "@prenom", admin.Prenom },
-                    { "@pwd", admin.Pwd }
+                    { "@pwd", admin.Pwd },
+                    { "@mail", admin.Mail }
                 };
                 try
                 {
